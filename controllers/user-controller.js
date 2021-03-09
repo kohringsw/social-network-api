@@ -1,8 +1,12 @@
-const { User, Thought } = require("../models");
+const { User } = require("../models");
 
 const userController = {
   getAllUsers(req, res) {
     User.find({})
+      .populate({
+        path: "friends",
+        select: ["-__v", "-thoughts"],
+      })
       .populate({
         path: "thoughts",
         select: "-__v",
@@ -83,9 +87,9 @@ const userController = {
   },
 
   addFriend({ params }, res) {
-    User.findByIdAndUpdate(
-      { _id: params.id },
-      { $addToSet: { friends: params.friendId } },
+    return User.findOneAndUpdate(
+      { _id: params.userId },
+      { $push: { friends: params.friendId } },
       { new: true }
     )
       .select("-__v")
@@ -100,10 +104,10 @@ const userController = {
         res.status(400).json(err);
       });
   },
-  
+
   removeFriend({ params }, res) {
-    User.findByIdAndUpdate(
-      { _id: params.id },
+    return User.findOneAndUpdate(
+      { _id: params.userId },
       { $pull: { friends: params.friendId } },
       { new: true, runValidators: true }
     )

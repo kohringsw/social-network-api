@@ -9,13 +9,13 @@ const ReactionSchema = new Schema(
     },
     reactionBody: {
       type: String,
-      required: "What is your reaction to this?",
+      required: true,
       minLength: 1,
       maxLength: 280,
     },
     username: {
       type: String,
-      required: "Please enter your username.",
+      required: true,
       trim: true,
     },
     createdAt: {
@@ -40,7 +40,7 @@ const ThoughtSchema = new Schema(
     },
     thoughtText: {
       type: String,
-      required: "What are your thoughts in 280 characters?",
+      required: true,
       minLength: 1,
       maxLength: 280,
     },
