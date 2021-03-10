@@ -12,7 +12,7 @@ This is the backend of a social network API application that uses MongoDB and ru
 - [Description](#description)
 - [Installation Instructions](#installation)
 - [Contributors](#contributors)
-- [Testing] (#testing)
+- [Testing](#testing)
 - [License](#license)
 - [Questions](#questions)
 
